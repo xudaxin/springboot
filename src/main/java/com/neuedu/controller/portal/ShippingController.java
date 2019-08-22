@@ -50,10 +50,10 @@ public class ShippingController {
      * */
     @RequestMapping("/del")
     public ServerResponse deleteaddress(HttpSession httpSession, @RequestParam("shippingId")Integer shippingId){
-        UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
-        if(userInfo==null){
-            return ServerResponse.creatResverResponseByfaile(1,"未登录");
-        }
+//        UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
+//        if(userInfo==null){
+//            return ServerResponse.creatResverResponseByfaile(1,"未登录");
+//        }
         return shippingServicelmpl.deleteaddress(shippingId);
     }
 
@@ -71,10 +71,10 @@ public class ShippingController {
                                         @RequestParam(value = "receiverAddress",required = false) String receiverAddress,
                                         @RequestParam(value = "receiverZip",required = false) String receiverZip){
 
-        UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
-        if(userInfo==null){
-            return ServerResponse.creatResverResponseByfaile(1,"未登录");
-        }
+//        UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
+//        if(userInfo==null){
+//            return ServerResponse.creatResverResponseByfaile(1,"未登录");
+//        }
         Shipping shipping=new Shipping();
         shipping.setId(id);
         shipping.setReceiverName(receiverName);
@@ -94,10 +94,10 @@ public class ShippingController {
 
     @RequestMapping("/select")
     public ServerResponse findaddressByshippingId(HttpSession httpSession,@RequestParam("shippingId") Integer shippingId){
-        UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
-        if(userInfo==null){
-            return ServerResponse.creatResverResponseByfaile(1,"请登录之后查询");
-        }
+//        UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
+//        if(userInfo==null){
+//            return ServerResponse.creatResverResponseByfaile(1,"请登录之后查询");
+//        }
 
         return shippingServicelmpl.findaddressByshippingId(shippingId);
     }
@@ -110,10 +110,10 @@ public class ShippingController {
     public ServerResponse addresslist(HttpSession httpSession,
                                       @RequestParam(value = "pageNum",required = false,defaultValue = "1") Integer pageNum,
                                       @RequestParam(value = "pageSize",required = false,defaultValue = "10")Integer pageSize ){
-        UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
-        if(userInfo==null){
-            return ServerResponse.creatResverResponseByfaile(1,"请登录之后查询");
-        }
+//        UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
+//        if(userInfo==null){
+//            return ServerResponse.creatResverResponseByfaile(1,"请登录之后查询");
+//        }
 
         return shippingServicelmpl.selectAlladdresslimit(pageNum,pageSize);
 

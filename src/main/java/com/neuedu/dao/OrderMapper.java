@@ -53,4 +53,7 @@ public interface OrderMapper {
     //根据orderid查询订单信息
     Order findByAndOrderNo(Long orderNo);
 
+    //查询需要关闭的订单
+    List<Order> findcloseOrder(String orderclosetime);
+
 }

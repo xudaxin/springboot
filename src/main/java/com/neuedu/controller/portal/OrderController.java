@@ -31,9 +31,9 @@ public class OrderController {
     public ServerResponse createOrder(HttpSession httpSession, Integer shippingId) {
 
         UserInfo userInfo = (UserInfo) httpSession.getAttribute("user");
-        if (userInfo == null) {
-            return ServerResponse.creatResverResponseByfaile(1, "未登录");
-        }
+//        if (userInfo == null) {
+//            return ServerResponse.creatResverResponseByfaile(1, "未登录");
+//        }
         return orderServicelmpl.createorder(userInfo.getId(), shippingId);
 
     }
@@ -45,9 +45,9 @@ public class OrderController {
     @RequestMapping("/cancel")
     public ServerResponse cancelorder(HttpSession httpSession, @RequestParam("orderNo") Long orderNo) {
         UserInfo userInfo = (UserInfo) httpSession.getAttribute("user");
-        if (userInfo == null) {
-            return ServerResponse.creatResverResponseByfaile(1, "未登录");
-        }
+//        if (userInfo == null) {
+//            return ServerResponse.creatResverResponseByfaile(1, "未登录");
+//        }
 
         return orderServicelmpl.cancelorder(userInfo.getId(), orderNo);
     }
@@ -60,9 +60,9 @@ public class OrderController {
     @RequestMapping("/get_order_cart_product")
     public ServerResponse get_order_cart_product(HttpSession httpSession) {
         UserInfo userInfo = (UserInfo) httpSession.getAttribute("user");
-        if (userInfo == null) {
-            return ServerResponse.creatResverResponseByfaile(1, "未登录");
-        }
+//        if (userInfo == null) {
+//            return ServerResponse.creatResverResponseByfaile(1, "未登录");
+//        }
 
         return orderServicelmpl.get_order_cart_product(userInfo.getId());
     }
@@ -74,9 +74,9 @@ public class OrderController {
     public ServerResponse pay(@PathVariable("orderNo") Long orderNo, HttpSession httpSession) {
 
         UserInfo userInfo = (UserInfo) httpSession.getAttribute("user");
-        if (userInfo == null) {
-            return ServerResponse.creatResverResponseByfaile(1, "未登录");
-        }
+//        if (userInfo == null) {
+//            return ServerResponse.creatResverResponseByfaile(1, "未登录");
+//        }
 
 //        Long orderno=Long.valueOf(orderNo);
         return orderServicelmpl.pay(userInfo.getId(), orderNo);
@@ -126,9 +126,9 @@ public class OrderController {
     @RequestMapping("/query_order_pay_status")
     public ServerResponse findorderstatus(HttpSession httpSession,@RequestParam("orderNo")Long orderNo){
         UserInfo userInfo = (UserInfo) httpSession.getAttribute("user");
-        if (userInfo == null) {
-            return ServerResponse.creatResverResponseByfaile(1, "未登录");
-        }
+//        if (userInfo == null) {
+//            return ServerResponse.creatResverResponseByfaile(1, "未登录");
+//        }
         return orderServicelmpl.findorderstatus(userInfo.getId(),orderNo);
     }
 

@@ -65,4 +65,7 @@ public interface ProductMapper {
 
     List<Product> searchproductsbyidandkeyword(@Param("integerList") List<Integer> integerList,
                                                @Param("keyword")String keyword);
+
+
+
 }

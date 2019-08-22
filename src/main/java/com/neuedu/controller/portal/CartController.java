@@ -22,9 +22,9 @@ public class CartController {
     @RequestMapping("/list")
     public ServerResponse CartList(HttpSession httpSession){
         UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
-        if(userInfo==null){
-            return ServerResponse.creatResverResponseByfaile(1,"用户未登录,请登录");
-        }
+//        if(userInfo==null){
+//            return ServerResponse.creatResverResponseByfaile(1,"用户未登录,请登录");
+//        }
 
         return cartServicelmpl.findCartListAll(userInfo.getUsername());
     }
@@ -38,9 +38,9 @@ public class CartController {
     @RequestMapping("/delete_product")
     public ServerResponse deteleproByProId(HttpSession httpSession, @RequestParam("productId")Integer productId){
         UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
-        if(userInfo==null){
-            return ServerResponse.creatResverResponseByfaile(1,"用户未登录,请登录");
-        }
+//        if(userInfo==null){
+//            return ServerResponse.creatResverResponseByfaile(1,"用户未登录,请登录");
+//        }
         return cartServicelmpl.deteleproByProId(productId,userInfo.getUsername());
     }
 
@@ -52,9 +52,9 @@ public class CartController {
     @RequestMapping("/get_cart_product_count")
     public ServerResponse findcartcounts(HttpSession httpSession){
         UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
-        if(userInfo==null){
-            return ServerResponse.creatResverResponseByfaile(0,"用户未登录,请登录");
-        }
+//        if(userInfo==null){
+//            return ServerResponse.creatResverResponseByfaile(0,"用户未登录,请登录");
+//        }
 
         return cartServicelmpl.searchproductcounts(userInfo.getUsername());
     }
@@ -65,9 +65,9 @@ public class CartController {
     @RequestMapping("/select_all")
     public ServerResponse selectAllProductInCart(HttpSession httpSession){
         UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
-        if(userInfo==null){
-            return ServerResponse.creatResverResponseByfaile(10,"用户未登录,请登录");
-        }
+//        if(userInfo==null){
+//            return ServerResponse.creatResverResponseByfaile(10,"用户未登录,请登录");
+//        }
 
         return cartServicelmpl.selectcarttAll(userInfo.getUsername());
     }
@@ -79,9 +79,9 @@ public class CartController {
     @RequestMapping("/un_select_all")
     public ServerResponse dropselectAllProductInCart(HttpSession httpSession){
         UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
-        if(userInfo==null){
-            return ServerResponse.creatResverResponseByfaile(10,"用户未登录,请登录");
-        }
+//        if(userInfo==null){
+//            return ServerResponse.creatResverResponseByfaile(10,"用户未登录,请登录");
+//        }
         return cartServicelmpl.dropselectcarttAll(userInfo.getUsername());
     }
 
@@ -92,9 +92,9 @@ public class CartController {
     @RequestMapping("/selectone")
     public ServerResponse selectOneProCart(HttpSession httpSession,@RequestParam("productId")Integer productId){
         UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
-        if(userInfo==null){
-            return ServerResponse.creatResverResponseByfaile(10,"用户未登录,请登录");
-        }
+//        if(userInfo==null){
+//            return ServerResponse.creatResverResponseByfaile(10,"用户未登录,请登录");
+//        }
 
         return cartServicelmpl.selectOneProCart(productId,userInfo.getUsername());
     }
@@ -105,9 +105,9 @@ public class CartController {
     @RequestMapping("/un_select")
     public ServerResponse unselectOneProCart(HttpSession httpSession,@RequestParam("productId")Integer productId){
         UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
-        if(userInfo==null){
-            return ServerResponse.creatResverResponseByfaile(10,"用户未登录,请登录");
-        }
+//        if(userInfo==null){
+//            return ServerResponse.creatResverResponseByfaile(10,"用户未登录,请登录");
+//        }
 
         return cartServicelmpl.unselectOneProCart(productId,userInfo.getUsername());
     }
@@ -118,9 +118,9 @@ public class CartController {
     @RequestMapping("/add")
     public ServerResponse addcart(HttpSession httpSession,@RequestParam("productId") Integer productId, @RequestParam("count") Integer count){
         UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
-        if(userInfo==null){
-            return ServerResponse.creatResverResponseByfaile(10,"用户未登录,请登录");
-        }
+//        if(userInfo==null){
+//            return ServerResponse.creatResverResponseByfaile(10,"用户未登录,请登录");
+//        }
 
         return cartServicelmpl.addProductToCart(userInfo.getId(),productId,count);
     }
@@ -133,9 +133,9 @@ public class CartController {
     public ServerResponse updatecartProductCount(HttpSession httpSession,@RequestParam("productId") Integer productId, @RequestParam("count") Integer count){
 
         UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
-        if(userInfo==null){
-            return ServerResponse.creatResverResponseByfaile(10,"用户未登录,请登录");
-        }
+//        if(userInfo==null){
+//            return ServerResponse.creatResverResponseByfaile(10,"用户未登录,请登录");
+//        }
         return cartServicelmpl.updatecartProductCount(userInfo.getId(),productId,count);
     }
 

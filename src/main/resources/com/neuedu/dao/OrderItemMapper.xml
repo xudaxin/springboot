@@ -108,4 +108,13 @@
     where order_no=#{orderNo} and user_id=#{userId}
 
   </select>
+
+  <select id="findorderItenbyOrderNo" resultMap="BaseResultMap" parameterType="long">
+
+    select id, user_id, order_no, product_id, product_name, product_image, current_unit_price,
+    quantity, total_price, create_time, update_time
+    from neuedu_order_item
+    where order_no=#{orderNo}
+
+  </select>
 </mapper>

@@ -10,7 +10,7 @@ import java.util.Date;
 //时间转换工具类
 public class DateUtils {
 
-    private static final String STANDARD_FORMAT="yyy-MM-dd HH:mm:ss";
+    public static final String STANDARD_FORMAT="yyy-MM-dd HH:mm:ss";
 
     //时间转字符串
     public static String dateToStr(Date date,String formate){   //需要引入一个依赖 joda-time,自定义时间的格式formate

@@ -42,11 +42,13 @@ public class UserController {
     //获取登录用户信息
     @RequestMapping("/get_user_info")
     public ServerResponse getUserMessage(HttpSession httpSession){
-        UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
-        if(userInfo==null){
-            return ServerResponse.creatResverResponseByfaile(1,"用户未登录，无法获取当前用户信息");
-        }
-        return ServerResponse.creatResverResponseBysucess(userInfo);
+//        UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
+//        if(userInfo==null){
+//            return ServerResponse.creatResverResponseByfaile(1,"用户未登录，无法获取当前用户信息");
+//        }
+//        return ServerResponse.creatResverResponseBysucess(userInfo);
+
+        return iUserService.findcurrentusermessageByuser(httpSession);
     }
 
     //忘记密码,通过用户名获得密保问题
@@ -85,14 +87,15 @@ public class UserController {
                                                      String answer){
         return iUserService.inupdateMessagebyUsername(httpSession,email,phone,question,answer);
 
+        //按道理应该把session中的用户信息也修改了 后期需要优化
+
     }
 
     //获取当前登录用户的详细信息
-    @RequestMapping("get_inforamtion")
+    @RequestMapping("/get_inforamtion")
     public ServerResponse getCurrentUserMessageByUser(HttpSession httpSession){
         return iUserService.findcurrentusermessageByuser(httpSession);
     }
-
 
 
     //退出登录

@@ -31,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -246,6 +247,33 @@ public class OrderServicelmpl implements IOrderService {
             return ServerResponse.creatResverResponseByfaile(10,"订单处于未知状态");
     }
 
+    //关闭订单
+    @Override
+    public List<Order> closeOrder(String closeOrderDate) {
+        List<Order>orderList=orderMapper.findcloseOrder(closeOrderDate);
+        if(orderList==null||orderList.size()==0){
+            return null;
+        }
+        //通过订单找到多个订单明细表
+        for(Order order:orderList){
+            List<OrderItem>orderItemList=orderItemMapper.findorderItenbyOrderNo(order.getOrderNo());
+            for(OrderItem orderItem:orderItemList){
+                //查找到商品的信息,通过userid和productid
+                Product product=productMapper.selectByPrimaryKey(orderItem.getProductId());
+                if(product==null){
+                    continue;
+                }
+                product.setStock(product.getStock()+orderItem.getQuantity());
+                //更新
+                productMapper.updateByPrimaryKey(product);  //库存更新完
+            }
+            //修改订单状态
+            order.setStatus(Const.OrderStatusENUM.ORDER_ClOSED.getCode());
+            orderMapper.updateByPrimaryKey(order);
+        }
+        return null;
+    }
+
     private static Log log = LogFactory.getLog(Main.class);
 
     // 支付宝当面付2.0服务
@@ -348,7 +376,7 @@ public class OrderServicelmpl implements IOrderService {
                 .setUndiscountableAmount(undiscountableAmount).setSellerId(sellerId).setBody(body)
                 .setOperatorId(operatorId).setStoreId(storeId).setExtendParams(extendParams)
                 .setTimeoutExpress(timeoutExpress)
-                .setNotifyUrl("http://9bmczw.natappfree.cc/order/callback")//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
+                .setNotifyUrl("http://siunp4.natappfree.cc/order/callback")//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
                 .setGoodsDetailList(goodsDetailList);
 
         AlipayF2FPrecreateResult result = tradeService.tradePrecreate(builder);

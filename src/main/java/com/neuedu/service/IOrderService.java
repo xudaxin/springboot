@@ -1,8 +1,11 @@
 package com.neuedu.service;
 
 import com.neuedu.common.ServerResponse;
+import com.neuedu.pojo.Order;
 import com.neuedu.pojo.UserInfo;
 
+import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 public interface IOrderService {
@@ -22,4 +25,7 @@ public interface IOrderService {
 
     //查询订单状态
     ServerResponse findorderstatus(Integer userId,Long orderNo);
+
+    //查询需要关闭的订单
+    List<Order> closeOrder(String closeOrderDate);
 }

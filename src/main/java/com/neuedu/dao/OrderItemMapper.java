@@ -54,4 +54,6 @@ public interface OrderItemMapper {
 
     //根据orderno和userid查询订单明细
     List<OrderItem> findOrderItemByOrderNoAndUserId(@Param("userId") Integer userId, @Param("orderNo")Long orderNo);
+    //根据orderno查询订单明细
+    List<OrderItem> findorderItenbyOrderNo(Long orderNo);
 }

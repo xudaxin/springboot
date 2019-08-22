@@ -171,6 +171,7 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.creatResverResponseByfaile(1,"用户未登录");
         }
         int result=userInfoMapper.InUpdateUserMessageByUsername(email,phone,question,answer,userInfo.getUsername());
+        //可以在这对session中的用户进行更新
         return ServerResponse.creatResverResponseBysucess("更新个人信息成功");
     }
 

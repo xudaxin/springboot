@@ -24,7 +24,7 @@ public class MySpringBootConfig implements WebMvcConfigurer{
     public void addInterceptors(InterceptorRegistry registry) {
 
         registry.addInterceptor(adminAuthroityInterceptor)
-                .addPathPatterns("");///manage/**
+                .addPathPatterns("/manage/order/**");///manage/**
        // .excludePathPatterns("/manage/login,manage/register");
 
 

@@ -4,6 +4,7 @@ import com.neuedu.common.ServerResponse;
 import com.neuedu.pojo.UserInfo;
 import com.neuedu.service.impl.CartServicelmpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ public class CartController {
      * 购物车列表
      * */
     @RequestMapping("/list")
+    @CrossOrigin
     public ServerResponse CartList(HttpSession httpSession){
         UserInfo userInfo=(UserInfo) httpSession.getAttribute("user");
 //        if(userInfo==null){

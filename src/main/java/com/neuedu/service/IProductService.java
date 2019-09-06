@@ -54,4 +54,16 @@ public interface IProductService {
                         Integer pageSize,
                         String orderBy);
 
+
+
+    /**
+     * 查询一级类别
+     * */
+    ServerResponse searchcatepid();
+
+    /**
+     * 查询上架的商品
+     * */
+    ServerResponse selectonpro();
+
 }

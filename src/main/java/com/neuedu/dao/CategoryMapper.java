@@ -59,6 +59,9 @@ public interface CategoryMapper {
 
     List<Category> findCategorysByPid(int pid);
 
+    //pid==0的类别
+    List<Category> searchcatepid();
+
 
 
 }

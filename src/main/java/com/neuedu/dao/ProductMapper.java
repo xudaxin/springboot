@@ -67,5 +67,9 @@ public interface ProductMapper {
                                                @Param("keyword")String keyword);
 
 
+    //查询上架商品信息
+    List<Product> selectonpro();
+
+
 
 }

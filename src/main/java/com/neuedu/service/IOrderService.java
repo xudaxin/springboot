@@ -28,4 +28,7 @@ public interface IOrderService {
 
     //查询需要关闭的订单
     List<Order> closeOrder(String closeOrderDate);
+
+    //查询未支付订单
+    ServerResponse findwaitpayorderlist(Integer userId);
 }

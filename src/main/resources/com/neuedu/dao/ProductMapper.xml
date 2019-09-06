@@ -171,5 +171,11 @@
         </where>
 
     </select>
+  <select id="selectonpro" resultMap="BaseResultMap">
+    select *
+    from neuedu_product
+    where status=1
+
+  </select>
 
 </mapper>

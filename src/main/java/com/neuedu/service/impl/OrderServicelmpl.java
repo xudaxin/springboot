@@ -30,13 +30,11 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class OrderServicelmpl implements IOrderService {
@@ -62,6 +60,7 @@ public class OrderServicelmpl implements IOrderService {
 //    private String ImageHost;
 
     //创建订单
+    @Transactional
     @Override
     public ServerResponse createorder(Integer userId, Integer shippingId) {
         //参数非空校验
@@ -78,7 +77,6 @@ public class OrderServicelmpl implements IOrderService {
             return serverResponse;
         }
 
-        //创建订单order并将其保存到数据库
 
          //计算订单的总价格
         List<OrderItem>orderItems=(List<OrderItem>) serverResponse.getData();  //返回订单详情
@@ -86,11 +84,12 @@ public class OrderServicelmpl implements IOrderService {
 //
 //        }
 
+        //创建订单order并将其保存到数据库
         Order order=createOrder(userId,shippingId,getOrderPrice(orderItems));
         if(order==null){
             return ServerResponse.creatResverResponseByfaile(1,"订单创建失败");
         }
-        //将ist<OrderItem>保存到数据库
+        //将list<OrderItem>保存到数据库
         for(OrderItem orderItem:orderItems){
             orderItem.setOrderNo(order.getOrderNo());
         }
@@ -162,6 +161,7 @@ public class OrderServicelmpl implements IOrderService {
     }
 
     //支付宝支付
+//    @Transactional  //添加了一个事务
     @Override
     public ServerResponse pay(Integer userId, Long orderNo) {
         //参数校验
@@ -269,9 +269,27 @@ public class OrderServicelmpl implements IOrderService {
             }
             //修改订单状态
             order.setStatus(Const.OrderStatusENUM.ORDER_ClOSED.getCode());
+            order.setCloseTime(new Date());//关单时间
             orderMapper.updateByPrimaryKey(order);
         }
         return null;
+    }
+
+    //查询未支付订单
+    @Override
+    public ServerResponse findwaitpayorderlist(Integer userId) {
+        //通过userid和状态为未支付在order中查询到order列表
+        List<Order>orderList=orderMapper.findwaitparorder(userId);
+        if(orderList==null||orderList.size()==0){
+            return ServerResponse.creatResverResponseByfaile(1,"该用户没有未支付的订单");
+        }
+        List<OrderVo>orderVoList=new ArrayList<>();
+        //通过orderno查询到orderitem列表
+        for(Order order:orderList){
+            orderVoList.add(createordervo(order,orderItemMapper.findorderItenbyOrderNo(order.getOrderNo()),order.getShippingId()));
+        }
+        //将orderitem转化为orderitemvo
+        return ServerResponse.creatResverResponseBysucess(orderVoList);
     }
 
     private static Log log = LogFactory.getLog(Main.class);
@@ -376,7 +394,7 @@ public class OrderServicelmpl implements IOrderService {
                 .setUndiscountableAmount(undiscountableAmount).setSellerId(sellerId).setBody(body)
                 .setOperatorId(operatorId).setStoreId(storeId).setExtendParams(extendParams)
                 .setTimeoutExpress(timeoutExpress)
-                .setNotifyUrl("http://siunp4.natappfree.cc/order/callback")//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
+                .setNotifyUrl("http://4zszrh.natappfree.cc/order/callback")//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
                 .setGoodsDetailList(goodsDetailList);
 
         AlipayF2FPrecreateResult result = tradeService.tradePrecreate(builder);

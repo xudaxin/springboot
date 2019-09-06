@@ -50,10 +50,14 @@ public interface OrderMapper {
     //根据userid和orderno查询订单信息
     Order findByuserIdAndOrderNo(@Param("userId") Integer userId, @Param("orderNo")Long orderNo);
 
-    //根据orderid查询订单信息
+    //根据orderno查询订单信息
     Order findByAndOrderNo(Long orderNo);
+
 
     //查询需要关闭的订单
     List<Order> findcloseOrder(String orderclosetime);
+
+    //查询未支付订单
+    List<Order> findwaitparorder(Integer userId);
 
 }

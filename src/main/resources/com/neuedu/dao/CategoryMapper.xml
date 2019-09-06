@@ -105,5 +105,10 @@
     from neuedu_category where parent_id=#{id}
   </select>
 
+  <select id="searchcatepid" resultMap="BaseResultMap">
+    select *
+    from neuedu_category where parent_id=0
+  </select>
+
 
 </mapper>

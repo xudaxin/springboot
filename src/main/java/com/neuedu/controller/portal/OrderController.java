@@ -132,4 +132,11 @@ public class OrderController {
         return orderServicelmpl.findorderstatus(userInfo.getId(),orderNo);
     }
 
+    //查询用户未付款的订单
+    @RequestMapping("/waitpayorder")
+    public ServerResponse findwaitpayorder(HttpSession httpSession){
+        UserInfo userInfo=(UserInfo)httpSession.getAttribute("user");
+        return orderServicelmpl.findwaitpayorderlist(userInfo.getId());
+    }
+
 }

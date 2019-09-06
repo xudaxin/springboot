@@ -261,6 +261,26 @@ public class ProductServiceImpl implements IProductService {
 
     }
 
+    //查询pid==0的类别
+    @Override
+    public ServerResponse searchcatepid() {
+        List<Category>categoryList=categoryMapper.searchcatepid();
+        if(categoryList==null||categoryList.size()==0){
+            return ServerResponse.creatResverResponseByfaile(1,"类别数据表为空！");
+        }
+        return ServerResponse.creatResverResponseBysucess(categoryList);
+    }
+
+    //查询上架商品信息
+    @Override
+    public ServerResponse selectonpro() {
+        List<Product> productList=productMapper.selectonpro();
+        if(productList==null||productList.size()==0){
+            return ServerResponse.creatResverResponseByfaile(1,"无上架商品!");
+        }
+        return ServerResponse.creatResverResponseBysucess(productList);
+    }
+
 
     public ServerResponse findproductdetailbyid(Integer productId){
         if(productId==null){

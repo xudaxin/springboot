@@ -4,12 +4,14 @@ package com.neuedu.controller.portal;
 import com.neuedu.common.ServerResponse;
 import com.neuedu.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/product")
+@CrossOrigin
 public class ProductControllerPortal {
 
     @Autowired
@@ -39,4 +41,24 @@ public class ProductControllerPortal {
                                @RequestParam(value = "orderBy",required = false,defaultValue = "")String orderBy){
         return iProductService.searchPrdlist(categoryId,keyword,pageNum,pageSize,orderBy);
     }
+
+    /**
+     * 获取一级商品类别，即pid等于0的
+     * */
+    @RequestMapping("/procatelist")
+    public ServerResponse procatelist(){
+        return iProductService.searchcatepid();
+    }
+
+
+    /**
+     * 查询上架商品
+     */
+
+    @RequestMapping("/proonlist")
+    public ServerResponse selectonpro(){
+        return iProductService.selectonpro();
+    }
+
+
 }
